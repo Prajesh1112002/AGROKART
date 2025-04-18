@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroKart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to AgroKart</h1>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('login')">Login</button>
+      <button onclick="showSection('products')">Products</button>
+      <button onclick="showSection('cart')">Cart</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home">
+      <h2>Home</h2>
+      <p>Welcome to the AgroKart platform!</p>
+    </section>
+
+    <section id="login" style="display:none;">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username"><br><br>
+      <input type="password" placeholder="Password"><br><br>
+      <button>Login</button>
+    </section>
+
+    <section id="products" style="display:none;">
+  <h2>Products</h2>
+  <div class="categories">
+    <button onclick="showCategory('fertilizers')">Fertilizers</button>
+    <button onclick="showCategory('seeds')">Seeds</button>
+    <button onclick="showCategory('materials')">Materials</button>
+    <button onclick="showCategory('pipes')">Pipes</button>
+  </div>
+
+  <div id="fertilizers" class="product-category" style="display:none;">
+  <h3>Fertilizers</h3>
+  <ul>
+    <li>
+      Organic Fertilizer
+      <button onclick="addToCart('Organic Fertilizer')">Add to Cart</button>
+    </li>
+    <li>
+      Urea Fertilizer
+      <button onclick="addToCart('Urea Fertilizer')">Add to Cart</button>
+    </li>
+  </ul>
+</div>
+  <div id="seeds" class="product-category" style="display:none;">
+    <h3>Seeds</h3>
+    <ul>
+      <li>
+	  Wheat Seeds
+	   <button onclick="addToCart('Wheat Seeds')">Add to Cart</button>
+	  </li>
+      <li>
+	  Rice Seeds
+	  <button onclick="addToCart('Rice Seeds')">Add to Cart</button>	
+	  </li>
+	  <li>
+    </ul>
+  </div>
+
+  <div id="materials" class="product-category" style="display:none;">
+    <h3>Materials</h3>
+    <ul>
+      <li>
+	  Shovel
+	  <button onclick="addToCart('Shovel')">Add to Cart</button>
+	  </li>
+      <li>
+	  Hoe
+	  <button onclick="addToCart('Hoe')">Add to Cart</button>
+	  </li>
+    </ul>
+  </div>
+
+  <div id="pipes" class="product-category" style="display:none;">
+    <h3>Pipes</h3>
+    <ul>
+      <li>
+	  PVC Pipes
+	  <button onclick="addToCart('PVC Pipes')">Add to Cart</button>
+	  </li>
+      <li>
+	  Drip Irrigation Pipes
+	  <button onclick="addToCart('Drip Irrigation Pipes')">Add to Cart</button>
+	  </li>
+    </ul>
+  </div>
+</section>
+
+
+    <section id="cart" style="display:none;">
+      <h2>Cart</h2>
+      <p>No items in cart yet.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
