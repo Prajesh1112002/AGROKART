@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroKart - Buyer Page</title>
+    <style>
+        /* --- same styling as before --- */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f9f1;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d6a4f;
+            margin-bottom: 20px;
+        }
+
+        .cart-link {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .cart-link a {
+            text-decoration: none;
+            color: #2d6a4f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1b4332;
+            margin-bottom: 5px;
+        }
+
+        .product-quantity {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .buy-btn {
+            background-color: #2d6a4f;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            background-color: #40916c;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Available Products</h1>
+    <div class="cart-link">
+        🛒 <a href="cart.html">Go to Cart</a>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+        <!-- Products from DB will appear here -->
+    </div>
+
+    <script>
+        fetch("http://localhost:8000/get-products")
+            .then(response => response.json())
+            .then(products => {
+                const grid = document.getElementById("productGrid");
+                products.forEach(product => {
+                    const card = document.createElement("div");
+                    card.className = "product-card";
+                    card.innerHTML = `
+                        <img src="data:image/jpeg;base64,${product.image}" alt="${product.name}">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-quantity">Quantity: ${product.quantity}</div>
+                        <button class="buy-btn" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+                    `;
+                    grid.appendChild(card);
+                });
+            });
+
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(`${product.name} added to cart!`);
+        }
+    </script>
+
+</body>
+</html>

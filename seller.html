@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seller Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f2f9f1 0%, #f2f9f1 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin:  auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      overflow: -moz-hidden-unscrollable0;
+    }
+
+    .header {
+      background: linear-gradient(1deg, #09814b 100%, rgb(237, 237, 108) 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    .form-section {
+      padding: 40px;
+      background: white;
+    }
+
+    #productForm {
+      display: grid;
+      gap: 25px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f9fafb;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #0b7811;
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.15);
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 15px;
+      border: 2px dashed #d1d5db;
+      border-radius: 12px;
+      background: #f9fafb;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    input[type="file"]:hover {
+      border-color: #2d6a4f;
+      background: #f0f0ff;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, #2d6a4f 0%);
+      color: white;
+      border: none;
+      padding: 18px 40px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button[type="submit"]::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s;
+    }
+
+    button[type="submit"]:hover::before {
+      left: 100%;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(9, 207, 111, 0.4);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background: linear-gradient(135deg, #2d6a4f 0%);
+      margin: 0;
+    }
+
+    .products-section {
+      padding: 40px;
+      background: #f8fafc;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1f2937;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(135deg, #2d6a4f 0%);
+      border-radius: 2px;
+    }
+
+    #productList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .product {
+      background: white;
+      border: none;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg,  #2d6a4f 100%);
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .product h3 {
+      color: #1f2937;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .product p {
+      color: #6b7280;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid hsl(247, 45%, 92%);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .header {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .form-section,
+      .products-section {
+        padding: 30px 20px;
+      }
+
+      #productList {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .empty-state h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Seller Product Upload</h1>
+    </div>
+
+    <div class="form-section">
+      <form id="productForm">
+        <div class="form-group">
+          <label>Product Name:</label>
+          <input type="text" id="productName" name="productName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Quantity:</label>
+          <input type="text" id="productQuantity" name="productQuantity" required>
+        </div>
+
+        <div class="form-group">
+          <label>Product Image:</label>
+          <input type="file" id="productImage" name="productImage" required>
+        </div>
+
+        <button type="submit">Upload Product</button>
+      </form>
+    </div>
+
+    <hr>
+
+    <div class="products-section">
+      <h2>Listed Products</h2>
+      <div id="productList"></div>
+    </div>
+  </div>
+
+  <script>
+    // Submit form
+    document.getElementById("productForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append("productName", document.getElementById("productName").value);
+      formData.append("productQuantity", document.getElementById("productQuantity").value);
+      formData.append("productImage", document.getElementById("productImage").files[0]);
+
+      fetch("http://localhost:8000/add-product", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        fetchProducts();  // reload list
+      });
+    });
+
+    // Fetch and display products
+    function fetchProducts() {
+      fetch("http://localhost:8000/get-products")
+        .then(res => res.json())
+        .then(products => {
+          const list = document.getElementById("productList");
+          list.innerHTML = "";
+          products.forEach(p => {
+            const div = document.createElement("div");
+            div.className = "product";
+            div.innerHTML = `
+              <h3>${p.name}</h3>
+              <p>Quantity: ${p.quantity}</p>
+              <img src="data:image/jpeg;base64,${p.image}" alt="Product Image" />
+            `;
+            list.appendChild(div);
+          });
+        });
+    }
+
+    // Load products on page load
+    window.onload = fetchProducts;
+  </script>
+</body>
+</html>
